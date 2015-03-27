@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.teamsports.sportsnewpager.fragment.MainFragment;
+import com.teamsports.sportsnewpager.fragment.MainFragmentNews;
 
 /**
  * Created by HTao on 2015/3/24.
@@ -20,14 +20,14 @@ public class TabAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
        if (position==0){
-           MainFragment fragment = new MainFragment();
+           MainFragmentNews fragment = new MainFragmentNews();
            Bundle bundle = new Bundle();
            bundle.putInt("feed_id",feed_id[position]);
            bundle.putString("TITLES",TITLES[position]);
            fragment.setArguments(bundle);
            return fragment;
        }else{
-           MainFragment fragment = new MainFragment();
+           MainFragmentNews fragment = new MainFragmentNews();
            Bundle bundle = new Bundle();
            bundle.putInt("feed_id",feed_id[position]);
            bundle.putString("TITLES",TITLES[position]);

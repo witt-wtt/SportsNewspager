@@ -37,9 +37,9 @@ import java.util.List;
  * Created by HTao on 2015/3/24.
  */
 @SuppressLint("ValidFragment")
-public class MainFragment extends ListFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class MainFragmentNews extends ListFragment implements SwipeRefreshLayout.OnRefreshListener{
     private int feed_id;
-    private static String Info = "MainFragment";
+    private static String Info = "MainFragmentNews";
     private String app_key = "2586208540";
     private ItemAdapter adapter;
     private HttpUtils httpUtils;
@@ -51,6 +51,9 @@ public class MainFragment extends ListFragment implements SwipeRefreshLayout.OnR
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
         feed_id = getArguments().getInt("feed_id");
+        if (feed_id==1009){
+            feed_id=653;
+        }
         return view;
     }
 

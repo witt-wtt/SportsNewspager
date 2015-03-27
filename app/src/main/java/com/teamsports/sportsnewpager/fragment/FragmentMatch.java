@@ -1,14 +1,14 @@
 package com.teamsports.sportsnewpager.fragment;
 
-import android.app.Activity;
+
 import android.graphics.Color;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.ListFragment;
+
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -19,9 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ContentView;
-import com.lidroid.xutils.view.annotation.ViewInject;
+
 import com.teamsports.com.teamsports.sportsnewspager.utils.BitmapHelper;
 import com.teamsports.sportsnewspager.sportsnewspager.R;
 
@@ -30,9 +28,10 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2015/3/24.
+ *
  */
 public class FragmentMatch extends Fragment implements ViewPager.OnPageChangeListener {
-	//定义一个集合来存储fragment
+	//定义一个集合来存储fragment,ViewPager适配器的数据源
 	private List<Fragment> fragmentList=new ArrayList<>();
 	//适配器
 	private Myadapter myadapter;
@@ -114,11 +113,13 @@ public class FragmentMatch extends Fragment implements ViewPager.OnPageChangeLis
 		//监听viewpager的滑动事件
 		viewPager_mian_show.setOnPageChangeListener(this);
 	}
+
 	@Override
 	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 		LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)id_tab_line_iv
 				.getLayoutParams();
 		Log.i("offset:", positionOffset + 1 + "");
+
 		if (currentIndex == 0 && position == 0)// 0->1
 		{
 			lp.leftMargin = (int) (positionOffset * (screenWidth * 1.0 / 3) + currentIndex

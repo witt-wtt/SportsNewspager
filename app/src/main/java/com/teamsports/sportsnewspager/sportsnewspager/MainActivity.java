@@ -26,11 +26,11 @@ public class MainActivity extends FragmentActivity {
         BitmapHelper.initUtils(this);
 
 		//默认显示
-		FragmentMatch fragmentMatch=new FragmentMatch();
+		FragmentMatch match=new FragmentMatch();
 		// 开启事务
 		FragmentTransaction transaction = getSupportFragmentManager()
 				.beginTransaction();
-		transaction.replace(R.id.layout_container, fragmentMatch);
+		transaction.replace(R.id.layout_container, match);
 		// 让事务开始执行
 		transaction.commit();
 
