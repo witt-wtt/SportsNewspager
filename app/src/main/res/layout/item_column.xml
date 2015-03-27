@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/column_imageView_pic"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_alignTop="@+id/column_textView_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:textColor="#000"
+        android:id="@+id/column_textView_title"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/column_imageView_pic"
+        android:layout_toEndOf="@+id/column_imageView_pic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:singleLine="true"
+        android:maxLength="11"
+        android:id="@+id/column_textView_desc"
+        android:layout_below="@+id/column_textView_submit"
+        android:layout_alignLeft="@+id/column_textView_title"
+        android:layout_alignStart="@+id/column_textView_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="订阅 +"
+        android:textColor="#f00"
+        android:padding="3dp"
+        android:clickable="true"
+
+        android:id="@+id/column_textView_submit"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/setbar_bg"
+        android:layout_below="@+id/column_textView_title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
