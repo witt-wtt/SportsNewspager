@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
@@ -66,6 +67,14 @@ public class ColumnAdapter extends BaseAdapter {
         columnEntity=data.get(position);
         holder.textView_title.setText(columnEntity.getTitle());
         holder.textView_desc.setText(columnEntity.getDesc());
+        holder.textView_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+           Toast.makeText(context, "点哪里啊？", Toast.LENGTH_LONG).show();
+
+            }
+        });
         //还差图片
         BitmapHelper.getUtils().display(holder.imageView_pic,
                 columnEntity.getPic(),

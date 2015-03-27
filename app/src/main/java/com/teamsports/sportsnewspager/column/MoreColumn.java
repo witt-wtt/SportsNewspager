@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lidroid.xutils.HttpUtils;
@@ -98,11 +99,6 @@ public class MoreColumn extends ActionBarActivity {
         switch(v.getId()){
             case R.id.moreColumn_return:
                 finish();
-                break;
-            case R.id.column_textView_submit:
-
-                Toast.makeText(this,"点哪里啊？",Toast.LENGTH_LONG).show();
-
                 break;
         }
 

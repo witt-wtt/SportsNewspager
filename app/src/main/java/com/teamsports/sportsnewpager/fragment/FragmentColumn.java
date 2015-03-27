@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.teamsports.com.teamsports.sportsnewspager.utils.AppConstants;
 import com.teamsports.sportsnewpager.adapter.ColumnAdapter;
+import com.teamsports.sportsnewspager.column.ColumnDetail;
 import com.teamsports.sportsnewspager.column.MoreColumn;
 import com.teamsports.sportsnewspager.entity.ColumnEntity;
 import com.teamsports.sportsnewspager.sportsnewspager.R;
@@ -92,6 +94,20 @@ public class FragmentColumn extends ListFragment implements SwipeRefreshLayout.O
         //继承ListFragment的便利性，可直接设置listView的适配器
         setListAdapter(adapter);
         loadData();
+
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ColumnEntity entity = (ColumnEntity) adapter.getItem(position);
+                String jsonId =entity.getId();
+                Intent intent=new Intent(getActivity(), ColumnDetail.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("jsonId",jsonId);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
         swipe.setOnRefreshListener(this);
 
     }
