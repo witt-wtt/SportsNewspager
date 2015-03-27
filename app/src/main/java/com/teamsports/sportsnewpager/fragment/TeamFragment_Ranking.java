@@ -86,8 +86,7 @@ public class TeamFragment_Ranking extends Fragment implements View.OnClickListen
 		team_tv_football.setOnClickListener(this);
 
 		//设置篮球条目监听
-		team_lv_baseketBall.setOnItemClickListener(this);
-
+		team_lv_footBall.setOnItemClickListener(this);
 
 
 		return view;
@@ -124,9 +123,6 @@ public class TeamFragment_Ranking extends Fragment implements View.OnClickListen
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		Intent intent = new Intent(getActivity(), BallTeamContentActivity.class);
-		Bundle bundle = new Bundle();
-		bundle.putInt("position", position);
-		intent.putExtras(bundle);
 		startActivity(intent);
 
 	}

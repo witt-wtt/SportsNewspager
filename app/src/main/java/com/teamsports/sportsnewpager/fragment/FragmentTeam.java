@@ -1,23 +1,16 @@
 package com.teamsports.sportsnewpager.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 
-import com.teamsports.sportsnewpager.asynctask.MyAsyncTask;
-import com.teamsports.sportsnewspager.entity.BallInfo;
 import com.teamsports.sportsnewspager.sportsnewspager.R;
 
 import java.util.ArrayList;
@@ -26,17 +19,19 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/3/24.
  */
-public class FragmentTeam extends Fragment implements RadioGroup.OnCheckedChangeListener{
+public class FragmentTeam extends Fragment implements RadioGroup.OnCheckedChangeListener, SwipeRefreshLayout.OnRefreshListener {
 
 	private ViewPager team_viewPager;
 	private RadioGroup team_rg_menu;
 	private List<Fragment> fragmentList = new ArrayList<>();
 	private MyPagerAdapter pagerAdapter;
+	private SwipeRefreshLayout refreshLayout;
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_team, container, false);
 		team_rg_menu = (RadioGroup) view.findViewById(R.id.team_rg_menu);
 		team_viewPager = (ViewPager) view.findViewById(R.id.team_viewPager);
+		refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragmentteam_swipe);
 		//在list里面添加碎片
 		fragmentList.add(new MyBallTeamFragment());
 		fragmentList.add(new TeamFragment_Ranking());
@@ -48,6 +43,9 @@ public class FragmentTeam extends Fragment implements RadioGroup.OnCheckedChange
 		team_rg_menu.setOnCheckedChangeListener(this);
 		//设置默认显示界面
 		team_viewPager.setCurrentItem(0);
+		//设置刷新监听
+		refreshLayout.setOnRefreshListener(this);
+
 		return view;
 	}
 	@Override
@@ -61,8 +59,15 @@ public class FragmentTeam extends Fragment implements RadioGroup.OnCheckedChange
 				break;
 		}
 	}
+
+	@Override
+	public void onRefresh() {
+		//刷新完成时，刷新停止
+		refreshLayout.setRefreshing(false);
+	}
+
 	//自定义viewPager适配器
-	class MyPagerAdapter extends FragmentPagerAdapter{
+	class MyPagerAdapter extends FragmentPagerAdapter {
 
 		public MyPagerAdapter(FragmentManager fm) {
 			super(fm);
