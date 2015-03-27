@@ -1,17 +1,17 @@
 package com.teamsports.sportsnewspager.sportsnewspager;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+
 import com.teamsports.com.teamsports.sportsnewspager.utils.BitmapHelper;
 import com.teamsports.sportsnewpager.fragment.FragmentColumn;
 import com.teamsports.sportsnewpager.fragment.FragmentMatch;
 import com.teamsports.sportsnewpager.fragment.FragmentNews;
 import com.teamsports.sportsnewpager.fragment.FragmentTeam;
-
-
+import com.teamsports.sportsnewspager.column.MoreColumn;
 
 
 public class MainActivity extends FragmentActivity {
@@ -86,6 +86,10 @@ public class MainActivity extends FragmentActivity {
 				transactionTeam.commit();
 
                 break;
+			case R.id.column_intent:
+				Intent intent=new Intent(MainActivity.this, MoreColumn.class);
+				startActivity(intent);
+				break;
         }
 
     }
