@@ -17,11 +17,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadFrom;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.teamsports.com.teamsports.sportsnewspager.utils.AppConstants;
 import com.teamsports.com.teamsports.sportsnewspager.utils.BitmapHelper;
 import com.teamsports.sportsnewspager.entity.ColumnEntity;
 import com.teamsports.sportsnewspager.sportsnewspager.R;
@@ -32,13 +39,18 @@ import java.util.List;
  * Created by Administrator on 2015/3/24.
  */
 public class ColumnAdapter extends BaseAdapter {
+    private HttpUtils http;
     private Context context;
     private List<ColumnEntity> data;
     private ColumnEntity columnEntity;
+    //POST请求数据
+    private RequestParams params;
+
 
     public ColumnAdapter(Context context, List<ColumnEntity> data) {
         this.context = context;
         this.data = data;
+        http=new HttpUtils();
     }
 
     @Override
@@ -63,15 +75,33 @@ public class ColumnAdapter extends BaseAdapter {
             convertView= LayoutInflater.from(context).inflate(R.layout.item_column,parent,false);
             convertView.setTag(new ViewHolder(convertView));
         }
-        ViewHolder holder= (ViewHolder) convertView.getTag();
+        final ViewHolder holder= (ViewHolder) convertView.getTag();
         columnEntity=data.get(position);
         holder.textView_title.setText(columnEntity.getTitle());
         holder.textView_desc.setText(columnEntity.getDesc());
+        final String id=columnEntity.getId();
         holder.textView_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            params=new RequestParams();
+            params.addBodyParameter("bundle", AppConstants.BUNDLE+id);
+          // Toast.makeText(context, "点哪里啊"+id, Toast.LENGTH_LONG).show();
 
-           Toast.makeText(context, "点哪里啊？", Toast.LENGTH_LONG).show();
+                http.send(HttpRequest.HttpMethod.POST,AppConstants.REQUEST+id,
+                        params,new RequestCallBack<String>() {
+                            @Override
+                            public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+                                    //holder.textView_submit.setVisibility(View.GONE);
+                                    
+                            }
+
+                            @Override
+                            public void onFailure(HttpException e, String s) {
+                                Toast.makeText(context,s,Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+
 
             }
         });
@@ -146,5 +176,19 @@ public class ColumnAdapter extends BaseAdapter {
             this.itemView = itemView;
             ViewUtils.inject(this, itemView);
         }
+    }
+    private void requestData(String id,RequestParams params){
+        http.send(HttpRequest.HttpMethod.POST,AppConstants.REQUEST+id,
+                params,new RequestCallBack<String>() {
+                    @Override
+                    public void onSuccess(ResponseInfo<String> stringResponseInfo) {
+
+                    }
+
+                    @Override
+                    public void onFailure(HttpException e, String s) {
+                        Toast.makeText(context,s,Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }

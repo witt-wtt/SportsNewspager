@@ -1,10 +1,12 @@
 package com.teamsports.sportsnewspager.column;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,9 +52,22 @@ public class MoreColumn extends ActionBarActivity {
 
 
         adapter=new ColumnAdapter(this,new ArrayList<ColumnEntity>());
-        listView.setAdapter(adapter);
         http=new HttpUtils();
+        listView.setAdapter(adapter);
         loadData();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ColumnEntity entity = (ColumnEntity) adapter.getItem(position);
+                String jsonId =entity.getId();
+                Intent intent=new Intent(MoreColumn.this, ColumnDetail.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("jsonId",jsonId);
+                Toast.makeText(MoreColumn.this,"--->"+jsonId,Toast.LENGTH_LONG).show();
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
     }
     private void loadData(){
@@ -71,6 +86,7 @@ public class MoreColumn extends ActionBarActivity {
                             for (int i = 0; i <list.length() ; i++) {
                                 JSONObject list_object=list.getJSONObject(i);
                                 ColumnEntity entity=new ColumnEntity();
+                                entity.setId(list_object.getString("_id"));
                                 entity.setTitle(list_object.getString("title"));
                                 entity.setDesc(list_object.getString("desc"));
                                 entity.setPic(list_object.getString("pic"));

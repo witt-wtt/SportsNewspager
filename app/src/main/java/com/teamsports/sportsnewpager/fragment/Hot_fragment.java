@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class Hot_fragment extends Fragment {
     //刷新
-    @ViewInject(R.id.swipe)
+
     private SwipeRefreshLayout swipe;
 
     //访问网络的地址
@@ -60,6 +60,9 @@ public class Hot_fragment extends Fragment {
         adapter = new HotAdapter(getActivity(), hotdata);
         http = new HttpUtils();
         hot_fragment_listview.setAdapter(adapter);
+        //初始化控件
+        swipe= ((SwipeRefreshLayout) view.findViewById(R.id.swipe));
+
         //加载数据
         startRefresh();
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -104,9 +107,7 @@ public class Hot_fragment extends Fragment {
                     }
                 }
                 swipe.setRefreshing(false);
-
             }
-
             @Override
             public void onFailure(HttpException e, String s) {
                 Toast.makeText(getActivity(),"网络加载失败！",Toast.LENGTH_LONG).show();

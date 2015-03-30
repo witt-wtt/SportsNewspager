@@ -83,7 +83,8 @@ public class FragmentColumn extends ListFragment implements SwipeRefreshLayout.O
         //listview添加头部
         TextView textView=new TextView(getActivity());
         textView.setText("热门推荐");
-      //  getListView().addHeaderView(textView);
+        textView.setPadding(6,8,getListView().getWidth()-5,6);
+      getListView().addHeaderView(textView);
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
