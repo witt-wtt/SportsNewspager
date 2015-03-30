@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TeamFragment_Ranking extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class TeamFragment_Ranking extends Fragment implements View.OnClickListener{
 	private ListView team_lv_footBall;
 	private ListView team_lv_baseketBall;
 
@@ -85,10 +85,29 @@ public class TeamFragment_Ranking extends Fragment implements View.OnClickListen
 		team_tv_bkball.setOnClickListener(this);
 		team_tv_football.setOnClickListener(this);
 
+		//设置足球条目监听
+		team_lv_footBall.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent1 = new Intent(getActivity(), BallTeamContentActivity.class);
+				Bundle bundle1 = new Bundle();
+				bundle1.putInt("index",0);
+				intent1.putExtras(bundle1);
+				startActivity(intent1);
+			}
+		});
+
 		//设置篮球条目监听
-		team_lv_footBall.setOnItemClickListener(this);
-
-
+		team_lv_baseketBall.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(getActivity(), BallTeamContentActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putInt("index",1);
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
 		return view;
 	}
 	private void initView(View view){
@@ -118,12 +137,5 @@ public class TeamFragment_Ranking extends Fragment implements View.OnClickListen
 		super.onDestroy();
 		basyncTask.cancel(true);
 		fasyncTask.cancel(true);
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Intent intent = new Intent(getActivity(), BallTeamContentActivity.class);
-		startActivity(intent);
-
 	}
 }
