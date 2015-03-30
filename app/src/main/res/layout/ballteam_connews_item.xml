@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/ballteam_item_news_img"
         android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="15dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>

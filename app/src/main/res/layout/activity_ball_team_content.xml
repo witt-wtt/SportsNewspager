@@ -23,6 +23,8 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
+            android:checked="true"
+            android:background="@drawable/select"
             android:text="比赛"/>
        <RadioButton
            android:id="@+id/ballteam_rb_news"
@@ -31,6 +33,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
+            android:background="@drawable/select"
             android:text="新闻"/>
        <RadioButton
            android:id="@+id/ballteam_rb_data"
@@ -39,6 +42,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
+            android:background="@drawable/select"
             android:text="资料"/>
        <RadioButton
            android:id="@+id/ballteam_rb_chatroom"
@@ -46,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
+            android:background="@drawable/select"
             android:gravity="center"
             android:text="聊天室"/>
        <RadioButton
@@ -55,6 +60,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:button="@null"
+            android:background="@drawable/select"
             android:text="微博"/>
    </RadioGroup>
     <android.support.v4.view.ViewPager

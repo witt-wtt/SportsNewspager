@@ -24,15 +24,18 @@ public class BallTeamConNewsFragment extends Fragment implements SwipeRefreshLay
 	private MyBallTeamConNewsAdapter newsAdapter;
 	private ListView newsListView;
 	private RequestQueue mQueue;
-//	private int num = 20;
 
-	private boolean buttom=false;
 	private List<BallTeamNewsInfo> totalList = new ArrayList<>();
 	private SwipeRefreshLayout refreshLayout;
+	public BallTeamConNewsFragment(){}
+	public BallTeamConNewsFragment(String newString){
+		this.newsString = newString;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_ball_team_con_match, container, false);
+		View view = inflater.inflate(R.layout.fragment_ball_team_con, container, false);
 		mQueue = Volley.newRequestQueue(getActivity());
 		refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
 		newsListView = (ListView) view.findViewById(R.id.ballteam_lv_coninfo);
@@ -40,21 +43,6 @@ public class BallTeamConNewsFragment extends Fragment implements SwipeRefreshLay
 		newsListView.setAdapter(newsAdapter);
 		refreshLayout.setOnRefreshListener(this);
 
-//		newsListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-//			@Override
-//			public void onScrollStateChanged(AbsListView view, int scrollState) {
-//				if(scrollState==0&&buttom==true){
-//					num+=20;
-//					totalList.clear();
-//					new BallTeamNewsInfAsyTask(getActivity(),totalList,newsAdapter,refreshLayout).execute(newsString+num);
-//				}
-//			}
-//
-//			@Override
-//			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//				buttom = (firstVisibleItem+visibleItemCount)==totalItemCount;
-//			}
-//		});
 		return view;
 	}
 
@@ -62,7 +50,6 @@ public class BallTeamConNewsFragment extends Fragment implements SwipeRefreshLay
 		super.onAttach(activity);
 
 	}
-
 
 	@Override
 	public void onRefresh() {
