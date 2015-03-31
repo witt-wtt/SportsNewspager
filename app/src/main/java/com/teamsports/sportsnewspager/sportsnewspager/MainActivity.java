@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.teamsports.com.teamsports.sportsnewspager.utils.BitmapHelper;
 import com.teamsports.sportsnewpager.fragment.FragmentColumn;
@@ -19,6 +21,9 @@ public class MainActivity extends FragmentActivity {
 	private FragmentNews fragmentNews;
 	private FragmentTeam fragmentTeam;
 	private FragmentColumn fragmentColumn;
+
+	private DrawerLayout layout_drawer;
+	private LinearLayout layout_main_leftdrawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +39,28 @@ public class MainActivity extends FragmentActivity {
 		// 让事务开始执行
 		transaction.commit();
 
+		layout_drawer = (DrawerLayout) findViewById(R.id.layout_drawer);
+		layout_main_leftdrawer = (LinearLayout) findViewById(R.id.layout_main_leftdrawer);
+
+		DrawerLayout.LayoutParams layoutParams = (DrawerLayout.LayoutParams) layout_main_leftdrawer.getLayoutParams();
+		layoutParams.width = getResources().getDisplayMetrics().widthPixels * 7 / 8;// 设置抽屉出现时的宽度
+
+		layout_main_leftdrawer.setLayoutParams(layoutParams);
+
     }
+
+	public void clickButton(View view) {
+		switch (view.getId()) {
+			/*case R.id.imageView_main_more:
+				layout_drawer.openDrawer(layout_main_rightdrawer);
+				break;*/
+			case R.id.imageView_drawer_back:
+				layout_drawer.closeDrawer(layout_main_leftdrawer);
+				break;
+		}
+	}
+
+
     public void clickText(View v){
     //注意碎片事务管理器的用法
         switch(v.getId()){
