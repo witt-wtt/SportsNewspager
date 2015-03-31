@@ -28,6 +28,7 @@ public class TabAdapter extends FragmentPagerAdapter {
         return fragment;
     }
 
+
     @Override
     public int getCount() {
         return TITLES.length;
