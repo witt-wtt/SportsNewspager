@@ -10,12 +10,21 @@ import android.view.ViewGroup;
 import com.teamsports.sportsnewspager.sportsnewspager.R;
 
 public class BallTeamConDataFragment extends Fragment {
-
+	private int flag;
+	private View view;
+	public BallTeamConDataFragment(int flag){
+		this.flag = flag;
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_ball_team_con, container, false);
+		if(flag==0){
+			view = inflater.inflate(R.layout.fragment_ball_team_confootdata, container, false);
+		}else{
+			view = inflater.inflate(R.layout.fragment_ball_team_conbkdata, container, false);
+		}
+
+		return view;
 	}
 	@Override
 	public void onAttach(Activity activity) {

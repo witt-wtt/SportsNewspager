@@ -49,14 +49,14 @@ public class BallTeamContentActivity extends ActionBarActivity implements RadioG
 		if(index==0){
 			flist.add(new BallTeamConMatchFragment(url));
 			flist.add(new BallTeamConNewsFragment(newsString));
-			flist.add(new BallTeamConDataFragment());
-			flist.add(new BallTeamConDataFragment());
+			flist.add(new BallTeamConDataFragment(0));
+			flist.add(new BallTeamConMatchFragment(url));
 			flist.add(new BallTeamConWeiBoFragment(footweibourl));
 		}else{
 			flist.add(new BallTeamConMatchFragment(bkmatchurl));
 			flist.add(new BallTeamConNewsFragment(bkNewsurl));
-			flist.add(new BallTeamConDataFragment());
-			flist.add(new BallTeamConDataFragment());
+			flist.add(new BallTeamConDataFragment(1));
+			flist.add(new BallTeamConMatchFragment(bkmatchurl));
 			flist.add(new BallTeamConWeiBoFragment(bkweibourl));
 		}
 
