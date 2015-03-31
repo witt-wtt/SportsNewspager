@@ -1,14 +1,11 @@
 package com.teamsports.sportsnewspager.column;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lidroid.xutils.HttpUtils;
@@ -51,7 +48,7 @@ public class MoreColumn extends ActionBarActivity {
         params.addBodyParameter("app_key", AppConstants.APP_KEY);
 
 
-        adapter=new ColumnAdapter(this,new ArrayList<ColumnEntity>());
+        adapter=new ColumnAdapter(this,new ArrayList<Object>());
         http=new HttpUtils();
         listView.setAdapter(adapter);
         loadData();

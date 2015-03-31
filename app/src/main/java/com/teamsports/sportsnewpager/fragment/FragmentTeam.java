@@ -1,23 +1,15 @@
 package com.teamsports.sportsnewpager.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 
-import com.teamsports.sportsnewpager.asynctask.MyAsyncTask;
-import com.teamsports.sportsnewspager.entity.BallInfo;
 import com.teamsports.sportsnewspager.sportsnewspager.R;
 
 import java.util.ArrayList;

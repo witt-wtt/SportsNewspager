@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.teamsports.com.teamsports.sportsnewspager.utils.MyImageCache;
-import com.teamsports.sportsnewspager.entity.BallTeamNewsInfo;
 import com.teamsports.sportsnewspager.entity.BallTeamWeiboInfo;
 import com.teamsports.sportsnewspager.sportsnewspager.R;
 

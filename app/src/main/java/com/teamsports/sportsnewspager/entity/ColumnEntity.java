@@ -40,4 +40,19 @@ public class ColumnEntity {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    /**
+     *??????
+     * @return
+     */
+    @Override
+    public ColumnEntity clone() {
+        ColumnEntity entity = new ColumnEntity();
+        entity.id = id;
+        entity.pic = pic;
+        entity.desc = desc;
+        entity.title = title;
+
+        return entity;
+    }
 }

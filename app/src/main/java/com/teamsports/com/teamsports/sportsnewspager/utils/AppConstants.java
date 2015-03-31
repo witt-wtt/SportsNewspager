@@ -4,6 +4,15 @@ package com.teamsports.com.teamsports.sportsnewspager.utils;
  * Created by Administrator on 2015/3/24.
  */
 public class AppConstants {
+
+    /** 保存是否是第一次运行程序的标记 */
+    public final static String IS_FIRST_RUN = "isFirstRun";
+    /** 不是第一次运行标识 */
+    public final static int NOT_FIRST = 1;
+    /** 是第一次运行标识 */
+    public final static int IS_FIRST = -1;
+
+
     /**
      * 专栏首页数据，POST请求
      */

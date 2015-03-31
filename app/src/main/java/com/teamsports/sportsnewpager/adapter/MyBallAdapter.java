@@ -26,7 +26,7 @@ public class MyBallAdapter extends BaseAdapter {
 	public MyBallAdapter(Context context, List<BallInfo> totallist, RequestQueue mQueue) {
 		this.context = context;
 		this.totallist = totallist;
-		imageCache = new ImageLoader(mQueue,MyImageCache.getInstance());
+		imageCache = new ImageLoader(mQueue, MyImageCache.getInstance());
 	}
 
 	@Override

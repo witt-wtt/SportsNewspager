@@ -11,5 +11,7 @@
     <string name="title_activity_ball_manage">球队管理</string>
     <string name="title_activity_more_column">MoreColumn</string>
     <string name="title_activity_ball_team_content">BallTeamContentActivity</string>
-    <string name="title_activity_column_detail">ColumnDetail</string>
+    <string name="title_activity_column_detail">SportsNewspager</string>
+    <string name="title_activity_start">SportsNewspager</string>
+    <string name="title_activity_welcome">SportsNewspager</string>
 </resources>

@@ -4,18 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-
-
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +24,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.teamsports.com.teamsports.sportsnewspager.utils.AppConstants;
 import com.teamsports.sportsnewpager.adapter.ColumnAdapter;
 import com.teamsports.sportsnewspager.column.ColumnDetail;
-import com.teamsports.sportsnewspager.column.MoreColumn;
 import com.teamsports.sportsnewspager.entity.ColumnEntity;
 import com.teamsports.sportsnewspager.sportsnewspager.R;
 
@@ -61,7 +53,9 @@ public class FragmentColumn extends ListFragment implements SwipeRefreshLayout.O
         super.onAttach(activity);
         if (adapter == null) {
 
-            adapter=new ColumnAdapter(activity,new ArrayList<ColumnEntity>());
+            ArrayList<Object> data = new ArrayList<>();
+            data.add("热门推荐");
+            adapter=new ColumnAdapter(activity, data);
         }
 
 
@@ -99,13 +93,15 @@ public class FragmentColumn extends ListFragment implements SwipeRefreshLayout.O
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ColumnEntity entity = (ColumnEntity) adapter.getItem(position);
-                String jsonId =entity.getId();
-                Intent intent=new Intent(getActivity(), ColumnDetail.class);
-                Bundle bundle=new Bundle();
-                bundle.putString("jsonId",jsonId);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if (adapter.getItem(position) instanceof ColumnEntity){
+                    ColumnEntity entity = (ColumnEntity) adapter.getItem(position);
+                    String jsonId =entity.getId();
+                    Intent intent=new Intent(getActivity(), ColumnDetail.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("jsonId",jsonId);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
 
             }
         });
@@ -124,7 +120,7 @@ public class FragmentColumn extends ListFragment implements SwipeRefreshLayout.O
 
     }
     public void loadData(){
-        initHeadView();
+//        initHeadView();
         http.send(HttpRequest.HttpMethod.POST,
                 AppConstants.COLUMN_MAIN, params,
                 new RequestCallBack<String>() {

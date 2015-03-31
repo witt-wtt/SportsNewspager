@@ -3,12 +3,9 @@ package com.teamsports.sportsnewpager.asynctask;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.teamsports.sportsnewpager.adapter.MyBallTeamConNewsAdapter;
 import com.teamsports.sportsnewpager.adapter.MyBallteamConWeiboAdapter;
-import com.teamsports.sportsnewspager.entity.BallTeamNewsInfo;
 import com.teamsports.sportsnewspager.entity.BallTeamWeiboInfo;
 
 import org.json.JSONArray;

@@ -1,14 +1,13 @@
 package com.teamsports.sportsnewpager.adapter;
 
 import android.content.Context;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
-import android.graphics.Shader.TileMode;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Shader;
+import android.graphics.Shader.TileMode;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +40,13 @@ import java.util.List;
 public class ColumnAdapter extends BaseAdapter {
     private HttpUtils http;
     private Context context;
-    private List<ColumnEntity> data;
+    private List<Object> data;
     private ColumnEntity columnEntity;
     //POST请求数据
     private RequestParams params;
 
 
-    public ColumnAdapter(Context context, List<ColumnEntity> data) {
+    public ColumnAdapter(Context context, List<Object> data) {
         this.context = context;
         this.data = data;
         http=new HttpUtils();
@@ -69,17 +68,29 @@ public class ColumnAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+        if (getItemViewType(position) == 1){
+            TextView textView=new TextView(context);
+            textView.setText(data.get(position).toString());
+            textView.setPadding(6,6,6,6);
+            return textView;
+
+        }
         //注意此处的写法
         if (convertView==null){
             convertView= LayoutInflater.from(context).inflate(R.layout.item_column,parent,false);
             convertView.setTag(new ViewHolder(convertView));
         }
         final ViewHolder holder= (ViewHolder) convertView.getTag();
-        columnEntity=data.get(position);
+        columnEntity= (ColumnEntity) data.get(position);
         holder.textView_title.setText(columnEntity.getTitle());
         holder.textView_desc.setText(columnEntity.getDesc());
         final String id=columnEntity.getId();
+        if (TextUtils.isEmpty(id)){
+            holder.textView_submit.setVisibility(View.GONE);
+        } else {
+            holder.textView_submit.setVisibility(View.VISIBLE);
+        }
         holder.textView_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +103,17 @@ public class ColumnAdapter extends BaseAdapter {
                             @Override
                             public void onSuccess(ResponseInfo<String> stringResponseInfo) {
                                     //holder.textView_submit.setVisibility(View.GONE);
+                                Toast.makeText(context,"订阅成功",Toast.LENGTH_LONG).show();
+                                for (Object entity : data){
+                                    if (entity instanceof ColumnEntity && id.equals(((ColumnEntity) entity).getId())){
+                                        ColumnEntity clone = ((ColumnEntity) entity).clone();
+                                        clone.setId(null);
+                                        data.add(0, clone);
+                                        notifyDataSetChanged();
+                                        break;
+                                    }
+
+                                }
                                     
                             }
 
@@ -149,6 +171,20 @@ public class ColumnAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (data.get(position) instanceof String){
+            return 1;
+        }
+        return 0;
+    }
+
     //添加数据
     public void addAll(List<ColumnEntity>columnEntities){
         data.addAll(columnEntities);
