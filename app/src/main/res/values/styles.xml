@@ -25,7 +25,6 @@
 
 
     <style name="MyTextAppearance.TabPageIndicator" parent="Widget">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/vpi__light_theme</item>
+        <item name="android:textColor">@drawable/tab_text</item>
     </style>
 </resources>

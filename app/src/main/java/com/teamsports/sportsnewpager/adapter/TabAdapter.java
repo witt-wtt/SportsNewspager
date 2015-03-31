@@ -22,7 +22,7 @@ public class TabAdapter extends FragmentPagerAdapter {
        if (position==0){
            MainFragment fragment = new MainFragment();
            Bundle bundle = new Bundle();
-           bundle.putInt("feed_id",feed_id[position]);
+           bundle.putInt("feed_id",feed_id[position+5]);
            bundle.putString("TITLES",TITLES[position]);
            fragment.setArguments(bundle);
            return fragment;
