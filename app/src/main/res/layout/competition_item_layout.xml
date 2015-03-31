@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
         <ImageView
             android:id="@+id/competition_item_logo"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:padding="4dp"
+            android:background="#ffe0e0e0"
             android:src="@drawable/ic_title_word_p"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
         <TextView
             android:id="@+id/competition_item_title"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="#ffe0e0e0"
+            android:gravity="center"
             android:text="fffff"
             android:layout_below="@+id/competition_item_logo"
             android:layout_centerHorizontal="true" />
