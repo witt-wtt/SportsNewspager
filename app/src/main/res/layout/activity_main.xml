@@ -22,6 +22,7 @@
             android:background="#E04242"
             android:id="@+id/linearLayout">
 
+
             <TextView
                 android:id="@+id/main_match"
                 android:layout_width="0dp"
