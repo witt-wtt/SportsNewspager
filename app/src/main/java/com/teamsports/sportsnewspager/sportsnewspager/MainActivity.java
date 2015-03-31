@@ -1,11 +1,11 @@
 package com.teamsports.sportsnewspager.sportsnewspager;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+
 import com.teamsports.com.teamsports.sportsnewspager.utils.BitmapHelper;
 import com.teamsports.sportsnewpager.fragment.FragmentColumn;
 import com.teamsports.sportsnewpager.fragment.FragmentMatch;
@@ -26,11 +26,11 @@ public class MainActivity extends FragmentActivity {
         BitmapHelper.initUtils(this);
 
 		//默认显示
-		FragmentMatch match=new FragmentMatch();
+		FragmentMatch fragmentMatch=new FragmentMatch();
 		// 开启事务
 		FragmentTransaction transaction = getSupportFragmentManager()
 				.beginTransaction();
-		transaction.replace(R.id.layout_container, match);
+		transaction.replace(R.id.layout_container, fragmentMatch);
 		// 让事务开始执行
 		transaction.commit();
 
@@ -86,11 +86,10 @@ public class MainActivity extends FragmentActivity {
 				transactionTeam.commit();
 
                 break;
-
-            case R.id.column_intent:
-                Intent intent=new Intent(MainActivity.this, MoreColumn.class);
-                startActivity(intent);
-                break;
+			case R.id.column_intent:
+				Intent intent=new Intent(MainActivity.this, MoreColumn.class);
+				startActivity(intent);
+				break;
         }
 
     }
