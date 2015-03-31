@@ -25,7 +25,6 @@ import com.teamsports.sportsnewspager.entity.NewsBean;
 import com.teamsports.sportsnewspager.sportsnewspager.R;
 import com.teamsports.sportsnewspager.sportsnewspager.WebActivity;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +36,7 @@ import java.util.List;
  * Created by HTao on 2015/3/24.
  */
 @SuppressLint("ValidFragment")
-public class MainFragment extends ListFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class MainFragment extends ListFragment implements SwipeRefreshLayout.OnRefreshListener {
     private int feed_id;
     private static String Info = "MainFragment";
     private String app_key = "2586208540";
@@ -45,7 +44,6 @@ public class MainFragment extends ListFragment implements SwipeRefreshLayout.OnR
     private HttpUtils httpUtils;
     @ViewInject(R.id.swipe)
     private SwipeRefreshLayout swipe;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,14 +61,14 @@ public class MainFragment extends ListFragment implements SwipeRefreshLayout.OnR
         setListAdapter(adapter);
         swipe.setOnRefreshListener(this);
         startRefresh();
-
     }
 
     @Override
     public void onRefresh() {
         startRefresh();
     }
-    public void startRefresh(){
+
+    public void startRefresh() {
         httpUtils.send(HttpRequest.HttpMethod.GET,
                 urlUtils.getChapter(app_key, feed_id),
                 new RequestCallBack<String>() {
@@ -81,46 +79,36 @@ public class MainFragment extends ListFragment implements SwipeRefreshLayout.OnR
                             //Log.d("MISTAKE","------>"+info.result);
                             // Toast.makeText(getActivity(),"执行到这儿了"+info.result,Toast.LENGTH_LONG).show();
                             JSONObject object = new JSONObject(info.result);
-                            //Toast.makeText(getActivity(),"执行到这儿了1"+object,Toast.LENGTH_LONG).show();
                             JSONObject result = object.getJSONObject("result");
-                            JSONObject data = result.getJSONObject("data");
-                            JSONObject feed = data.getJSONObject("feed");
-                            JSONArray dataArray = feed.getJSONArray("data");
-                            Log.i(Info, "---+>"+info.result);
-                            if(feed_id ==1009){
-                                Log.i(Info, "--->"+info.result);
-                                JSONObject object1 = dataArray.getJSONObject(1);
-
-                                JSONArray data_array = object1.getJSONArray("data");
-                                List<NewsBean> beans = new ArrayList<NewsBean>();
-                                for (int i = 0; i < dataArray.length(); i++) {
-                                    JSONObject dataObject = data_array.getJSONObject(i);
-                                    //Toast.makeText(getActivity(),"执行到这儿了3",Toast.LENGTH_LONG).show();
-                                    NewsBean bean = new NewsBean();
-                                    bean.setTitle(dataObject.getString("title"));
-                                    bean.setUrl(dataObject.getString("url"));
-                                    if (dataObject.optJSONObject("video_info") != null) {
-                                        JSONObject video = dataObject.optJSONObject("video_info");
-                                        //Toast.makeText(getActivity(),"执行到这儿了4",Toast.LENGTH_LONG).show();
-                                        bean.setShow_count(video.getString("count"));
-                                        //Toast.makeText(getActivity(),"执行到这儿了5",Toast.LENGTH_LONG).show();
-                                        bean.setImage(video.getString("imagelink"));
-                                    } else {
-                                        bean.setShow_count(dataObject.getString("comment_show"));
-                                        JSONObject img = dataObject.getJSONObject("img");
-                                        bean.setImage(img.getString("u"));
-
+                            Log.i(Info, "---+>" + info.result);
+                            if (feed_id == 1009) {
+                                Log.i(Info, "---+>进来了1009");
+                                JSONArray data = result.getJSONArray("data");
+                                for (int i = 0; i < data.length(); i++) {
+                                    JSONObject dataObject = data.getJSONObject(i);
+                                    JSONArray jsonArray_data = dataObject.getJSONArray("data");
+                                    List<NewsBean> beans = new ArrayList<>();
+                                    for (int j = 1; j < jsonArray_data.length(); j++) {
+                                        JSONObject object_item = jsonArray_data.getJSONObject(j);
+                                        NewsBean bean = new NewsBean();
+                                        bean.setTitle(object_item.getString("title"));
+                                        bean.setUrl(object_item.getString("url"));
+                                        bean.setImage(object_item.getString("image"));
+                                        JSONObject jsonObject_comment = object_item.getJSONObject("comment");
+                                        bean.setShow_count(jsonObject_comment.getString("show_count"));
+                                        beans.add(bean);
                                     }
-                                    beans.add(bean);
-
+                                    adapter.addAll(beans);
+                                    Toast.makeText(getActivity(), "", Toast.LENGTH_LONG).show();
                                 }
-                                adapter.addAll(beans);
-                                Toast.makeText(getActivity(), "", Toast.LENGTH_LONG).show();
-                            }else {
+                            } else {
+                                JSONObject data = result.getJSONObject("data");
+                                JSONObject feed = data.getJSONObject("feed");
+                                JSONArray jsonArray_data = feed.getJSONArray("data");
                                 //Toast.makeText(getActivity(),"执行到这儿了2"+dataArray.length(),Toast.LENGTH_LONG).show();
                                 List<NewsBean> beans = new ArrayList<NewsBean>();
-                                for (int i = 0; i < dataArray.length(); i++) {
-                                    JSONObject dataObject = dataArray.getJSONObject(i);
+                                for (int i = 0; i < jsonArray_data.length(); i++) {
+                                    JSONObject dataObject = jsonArray_data.getJSONObject(i);
                                     //Toast.makeText(getActivity(),"执行到这儿了3",Toast.LENGTH_LONG).show();
                                     NewsBean bean = new NewsBean();
                                     bean.setTitle(dataObject.getString("title"));
@@ -135,10 +123,8 @@ public class MainFragment extends ListFragment implements SwipeRefreshLayout.OnR
                                         bean.setShow_count(dataObject.getString("comment_show"));
                                         JSONObject img = dataObject.getJSONObject("img");
                                         bean.setImage(img.getString("u"));
-
                                     }
                                     beans.add(bean);
-
                                 }
                                 adapter.addAll(beans);
 //                                Toast.makeText(getActivity(), "", Toast.LENGTH_LONG).show();
@@ -160,10 +146,10 @@ public class MainFragment extends ListFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Intent intent = new Intent(getActivity(),WebActivity.class);
+        Intent intent = new Intent(getActivity(), WebActivity.class);
         NewsBean item = (NewsBean) adapter.getItem(position);
-        intent.putExtra("url",item.getUrl());
-        Log.i(Info,"----^^"+item.getUrl());
+        intent.putExtra("url", item.getUrl());
+        Log.i(Info, "----^^" + item.getUrl());
         startActivity(intent);
 
     }
